@@ -11,3 +11,4 @@ require("rc.keymap")
 
 require("plugins.file-manager")
 require("plugins.auto-format")
+require("plugins.lsp")

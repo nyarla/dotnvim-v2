@@ -20,3 +20,5 @@ end
 
 vnoremap("zs", ":sort<CR>")
 vnoremap("zS", ":sort!<CR>")
+
+nnoremap("<C-n>",":NvimTreeToggle<CR>")
