@@ -17,6 +17,7 @@ set.clipboard = "unnamed,unnamedplus"
 set.mouse = "a"
 
 set.expandtab = true
+set.tabstop = 4
 set.shiftwidth = 2
 set.softtabstop = 2
 set.autoindent = true
