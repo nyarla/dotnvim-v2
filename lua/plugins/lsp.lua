@@ -26,6 +26,7 @@ cmp.setup {
     {name = "treesitter"},
     {name = "cmp_tabnine"},
     {name = "buffer"},
+    {name = "vsnip"},
     {name = "omni"}
   },
   formatting = {

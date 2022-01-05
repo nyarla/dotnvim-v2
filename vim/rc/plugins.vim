@@ -17,6 +17,8 @@ Plug 'ray-x/cmp-treesitter'
 Plug 'tzachar/cmp-tabnine', {'do': 'sh install.sh'}
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-omni'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
