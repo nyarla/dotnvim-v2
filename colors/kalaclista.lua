@@ -127,7 +127,7 @@ apply("CmpItemMenuDefault", "bright", "NONE", "NONE")
 
 -- meta
 apply("Title", "light", "", "bold")
-apply("Comment", "light", "dark", "")
+apply("Comment", "gray", "dark", "bold")
 
 apply("Constant", "bright", "", "NONE")
 apply("String", "yellow", "", "NONE")
