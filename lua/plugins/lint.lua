@@ -9,7 +9,7 @@ ls.setup {
       {
         runtime_condition = function(params)
           local rootdir = u.root_pattern(".github")(params.bufname)
-          return rootdir and strings.match(params.bufname, ".github/workflows/[^.]+.yaml")
+          return rootdir and string.match(params.bufname, ".github/workflows/[^.]+.yaml")
         end
       }
     ),
