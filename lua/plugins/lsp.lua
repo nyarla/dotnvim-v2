@@ -29,6 +29,11 @@ cmp.setup {
     {name = "vsnip"},
     {name = "omni"}
   },
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end
+  },
   formatting = {
     format = kind.cmp_format(
       {
