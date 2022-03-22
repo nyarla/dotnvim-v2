@@ -8,6 +8,10 @@ call plug#begin('~/.local/share/nvim')
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua', {'tag': '1.6.7'}
 
+" status or tab line
+" ------------------
+Plug 'nvim-lualine/lualine.nvim'
+
 " auto-complete
 " -------------
 Plug 'onsails/lspkind-nvim'
