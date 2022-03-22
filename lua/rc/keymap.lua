@@ -39,6 +39,18 @@ nnoremap("<C-t>t", "<Esc>:tabnew<CR>:terminal<CR>")
 inoremap("<C-t>t", "<Esc>:tabnew<CR>:terminal<CR>")
 tnoremap("<C-t>t", "<C-\\><C-n>:tabnew<CR>:terminal<CR>")
 
+nnoremap("<C-t>|", "<Esc>:botright vsplit<CR>:terminal<CR>")
+inoremap("<C-t>|", "<Esc>:botright vsplit<CR>:terminal<CR>")
+tnoremap("<C-t>|", "<C-\\><C-n>:botright vsplit<CR>:terminal<CR>")
+
+nnoremap("<C-t>-", "<Esc>:split<CR>:terminal<CR>")
+inoremap("<C-t>-", "<Esc>:split<CR>:terminal<CR>")
+tnoremap("<C-t>-", "<C-\\><C-n>:botright split<CR>:terminal<CR>")
+
+nnoremap("<C-t>q", "<Esc>")
+inoremap("<C-t>q", "<Esc>")
+tnoremap("<C-t>q", "<C-\\><C-n>")
+
 nnoremap("<C-t>x", "<Esc>:tabclose<CR>")
 inoremap("<C-t>x", "<Esc>:tabclose<CR>")
 tnoremap("<C-t>x", "<C-\\><C-n>:tabclose<CR>")
