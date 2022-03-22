@@ -2,12 +2,13 @@ local cmp = require("cmp")
 local kind = require("lspkind")
 
 local icons = {
-  buffer = "﬘",
-  cmp_tabnine = "",
-  omni = "",
-  path = "",
+  vim_lsp = "",
+  path = "",
   treesitter = "滑",
-  vim_lsp = ""
+  cmp_tabnine = "",
+  buffer = "﬘",
+  vsnip = "",
+  omni = ""
 }
 
 cmp.setup {
