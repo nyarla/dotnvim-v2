@@ -36,9 +36,6 @@ Plug 'dmitmel/cmp-vim-lsp'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'sbdchd/neoformat'
 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'jose-elias-alvarez/null-ls.nvim'
-
 " nix
 " ---
 Plug 'LnL7/vim-nix'
