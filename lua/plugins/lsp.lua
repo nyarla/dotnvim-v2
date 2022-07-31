@@ -11,6 +11,16 @@ local icons = {
   omni = ""
 }
 
+local g = vim.g
+g.lsp_diagnostics_enabled = 1
+g.lsp_diagnostics_cursor = 1
+g.lsp_settings = {
+  ["efm-langserver"] = {
+    disabled = false,
+    allowlist = {"markdown"}
+  }
+}
+
 cmp.setup {
   mapping = {
     ["<Tab>"] = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Insert}),
