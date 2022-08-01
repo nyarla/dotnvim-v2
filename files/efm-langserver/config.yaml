@@ -1,0 +1,18 @@
+version: 2
+
+log-file: /home/nyarla/.cache/efm-langserver.log
+log-level: 5
+
+tools:
+  markdown-textlint: &markdown-textlint
+    lint-command: 'env NODE_PATH="$(cd "$(dirname "$(which textlint)")/../" && pwd)" textlint -c $(pwd)/.textlintrc.yaml -f compact "${INPUT}"'
+    lint-ignore-exit-code: true
+    lint-stdin: false
+    lint-formats:
+      - "%f: line %l, col %c, %trror - %m (%r)"
+    root-markers:
+      - .textlintrc.yaml
+
+languages:
+  markdown:
+    - <<: *markdown-textlint
