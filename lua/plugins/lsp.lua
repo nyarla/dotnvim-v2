@@ -13,7 +13,8 @@ local icons = {
 
 local g = vim.g
 g.lsp_diagnostics_enabled = 1
-g.lsp_diagnostics_cursor = 1
+g.lsp_diagnostics_echo_cursor = 1
+g.lsp_diagnostics_echo_delay = 200
 g.lsp_settings = {
   ["efm-langserver"] = {
     disabled = false,
