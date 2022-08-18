@@ -18,11 +18,15 @@ Plug 'onsails/lspkind-nvim'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-path'
 Plug 'ray-x/cmp-treesitter'
-Plug 'tzachar/cmp-tabnine', {'do': 'sh install.sh'}
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-omni'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
+
+let s:hostname = trim(system('hostname'))
+if s:hostname == 'nixos'
+  Plug 'tzachar/cmp-tabnine', {'do': 'sh install.sh'}
+endif
 
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
