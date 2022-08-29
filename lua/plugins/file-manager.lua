@@ -2,7 +2,7 @@ local fm = require("nvim-tree")
 
 fm.setup {
   view = {
-    auto_resize = true
+    side = "left"
   },
   git = {
     ignore = false
