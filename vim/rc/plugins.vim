@@ -6,7 +6,7 @@ call plug#begin('~/.local/share/nvim')
 " file manager
 " ------------
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua', {'tag': '1.6.7'}
+Plug 'kyazdani42/nvim-tree.lua'
 
 " status or tab line
 " ------------------
