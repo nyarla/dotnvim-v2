@@ -28,7 +28,8 @@ setup:
 	@$(MAKE) run ID=$(ASROOT) CMD="chown -R $(ASUSER) /data"
 	@$(MAKE) run ID=$(ASUSER) CMD="test -d /data/config || mkdir -p /data/config"
 	@$(MAKE) run ID=$(ASUSER) CMD="test -d /data/local 	|| mkdir -p /data/local"
-	@$(MAKE) run ID=$(ASUSER) CMD="test -d ~/.config/nvim/.git || git clone https://github.com/nyarla/dotnvim-v2 ~/.config/nvim"
+	@$(MAKE) run ID=$(ASUSER) CMD="test -d ~/.config/nvim/.git \
+		|| (cd ~/.config/nvim && git init && git remote add origin https://github.com/nyarla/dotnvim-v2 && git pull origin main)"
 	@$(MAKE) run ID=$(ASUSER) CMD="cd ~/.config/nvim && git restore --staged . && git restore . && git pull origin main"
 
 shell:
@@ -38,12 +39,12 @@ root:
 	@$(MAKE) run ID=$(ASROOT) CMD="cd ~/; bash --login"
 
 edit:
-	@docker run -it -v nvim:/data:z -u $(ASUSER) \
-		--net no-internet \
+	@docker run -it -v nvim:/data:ro -u $(ASUSER) \
+		--net none \
 		--mount type=bind,src=$(shell pwd),dst=$(shell pwd) \
 		--entrypoint /usr/bin/nvim nvim:latest "$(shell pwd)"
 
 edit-with-net:
-	docker run -it -v nvim:/data:z -u $(ASUSER) \
+	@docker run -it -v nvim:/data:z -u $(ASUSER) \
 		--entrypoint /usr/bin/nvim nvim:latest "$(shell pwd)"
 

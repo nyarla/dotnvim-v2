@@ -20,7 +20,9 @@ RUN   pacman -Syu --noconfirm \
         \
         go
 
-RUN   (test -d $HOME/.config || ln -sf /data/config $HOME/.config) \
-  &&  (test -d $HOME/.local  || ln -sf /data/local $HOME/.local)
+RUN \
+    mkdir -p $HOME/.local/state/nvim/shada && chown $UID:$GID $HOME/.local/state/nvim/shada \
+&&  mkdir -p $HOME/.config  && ln -sf /data/config  $HOME/.config/nvim \
+&&  mkdir -p $HOME/.local   && ln -sf /data/local   $HOME/.local/share
 
 ENTRYPOINT ["/bin/bash"]
