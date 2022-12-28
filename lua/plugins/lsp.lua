@@ -36,7 +36,6 @@ cmp.setup {
     {name = "vim_lsp"},
     {name = "path"},
     {name = "treesitter"},
-    {name = "cmp_tabnine"},
     {name = "buffer"},
     {name = "vsnip"},
     {name = "omni"}
