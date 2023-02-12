@@ -32,7 +32,7 @@ Plug 'dmitmel/cmp-vim-lsp'
 
 " generic
 " -------
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'commit': 'd7c12db4c8bdb54afa787927292bf2d916bd09a2'}
 Plug 'sbdchd/neoformat'
 
 " nix

@@ -1,38 +1,24 @@
-local eval = vim.cmd
-local set = vim.opt
 local global = vim.g
+local eval = vim.cmd
+local define = require("colors.define")
 
-local colors = {
-  dark = {"00", "#000000"},
-  gray = {"08", "#666666"},
-  light = {"07", "#F9F9F9"},
-  bright = {"15", "#FFFFFF"},
-  red = {"01", "#FF6633"},
-  green = {"02", "#CCFF00"},
-  yellow = {"03", "#FFCC33"},
-  blue = {"04", "#00CCFF"},
-  magenta = {"05", "#CC99CC"},
-  cyan = {"06", "#00CCCC"},
-  NONE = {"NONE", "NONE"}
-}
-
-local function apply(group, fg, bg, attr)
-  local codes = {"hi", group}
-  local foreground = colors[fg]
-
+local function assign(name, fg, bg, options)
   if (fg ~= "") then
-    codes[#codes + 1] = "ctermfg=" .. colors[fg][1] .. " guifg=" .. colors[fg][2]
+    options["fg"] = define[fg]["hex"]
   end
 
   if (bg ~= "") then
-    codes[#codes + 1] = "ctermbg=" .. colors[bg][1] .. " guibg=" .. colors[bg][2]
+    options["bg"] = define[bg]["hex"]
   end
 
-  if (attr ~= "") then
-    codes[#codes + 1] = "cterm=" .. attr .. " gui=" .. attr
-  end
+  vim.api.nvim_set_hl(0, name, options)
+end
 
-  eval(table.concat(codes, " "))
+local function bind(src, dest)
+  local opts = {default = true}
+  opts["link"] = dest
+
+  vim.api.nvim_set_hl(0, src, opts)
 end
 
 if (vim.fn.exists("syntax_on")) then
@@ -41,199 +27,128 @@ end
 
 global.color_name = "kalaclista"
 
-global.terminal_color_0 = colors["dark"][1]
-global.terminal_color_1 = colors["red"][1]
-global.terminal_color_2 = colors["green"][1]
-global.terminal_color_3 = colors["yellow"][1]
-global.terminal_color_4 = colors["blue"][1]
-global.terminal_color_5 = colors["magenta"][1]
-global.terminal_color_6 = colors["cyan"][1]
-global.terminal_color_7 = colors["light"][1]
-global.terminal_color_8 = colors["gray"][1]
-global.terminal_color_9 = colors["red"][1]
-global.terminal_color_10 = colors["green"][1]
-global.terminal_color_11 = colors["yellow"][1]
-global.terminal_color_12 = colors["blue"][1]
-global.terminal_color_13 = colors["magenta"][1]
-global.terminal_color_14 = colors["cyan"][1]
-global.terminal_color_15 = colors["bright"][1]
-global.terminal_color_background = colors["dark"][1]
-global.terminal_color_foreground = colors["light"][1]
+-- Terminal
+-- ========
+global.terminal_color_0 = define["dark"]["hex"]
+global.terminal_color_1 = define["red"]["hex"]
+global.terminal_color_2 = define["green"]["hex"]
+global.terminal_color_3 = define["yellow"]["hex"]
+global.terminal_color_4 = define["blue"]["hex"]
+global.terminal_color_5 = define["magenta"]["hex"]
+global.terminal_color_6 = define["cyan"]["hex"]
+global.terminal_color_7 = define["light"]["hex"]
+global.terminal_color_8 = define["gray"]["hex"]
+global.terminal_color_9 = define["red"]["hex"]
+global.terminal_color_10 = define["green"]["hex"]
+global.terminal_color_11 = define["yellow"]["hex"]
+global.terminal_color_12 = define["blue"]["hex"]
+global.terminal_color_13 = define["magenta"]["hex"]
+global.terminal_color_14 = define["cyan"]["hex"]
+global.terminal_color_15 = define["bright"]["hex"]
+global.terminal_color_background = define["dark"]["hex"]
+global.terminal_color_foreground = define["light"]["hex"]
 
 -- Interface
 -- =========
 
--- text
-apply("Normal", "light", "", "")
-apply("Bold", "", "", "bold")
-apply("Directory", "cyan", "", "")
-apply("NonText", "gray", "", "bold")
-apply("SpecialKey", "cyan", "", "bold")
-
 -- msg
-apply("MoreMsg", "green", "", "bold")
-apply("ModeMsg", "blue", "", "bold")
-apply("Question", "blue", "", "bold")
-apply("MatchParen", "dark", "green", "underline")
-apply("Error", "bright", "red", "bold")
-apply("ErrorMsg", "red", "dark", "")
-apply("WarningMsg", "yellow", "dark", "bold")
+assign("Normal", "light", "", {})
+assign("Bold", "", "", {bold = true})
+assign("Directory", "cyan", "", {})
+assign("NonText", "gray", "", {bold = true})
+assign("SpecialKey", "cyan", "", {bold = true})
 
 -- UI
-apply("Cursor", "dark", "green", "bold")
-apply("Visual", "dark", "blue", "")
+assign("MoreMsg", "green", "", {bold = true})
+assign("ModeMsg", "blue", "", {bold = true})
+assign("Question", "blue", "", {bold = true})
+assign("MatchParen", "dark", "green", {underline = true})
+assign("Error", "bright", "red", {bold = true})
+assign("ErrorMsg", "red", "dark", {})
+assign("WarningMsg", "yellow", "dark", {})
 
-apply("LineNr", "gray", "dark", "")
-apply("LineNrAbove", "gray", "dark", "")
-apply("LineNrBelow", "gray", "dark", "")
-apply("CursorLine", "NONE", "NONE", "NONE")
-apply("CursorLineNr", "bright", "dark", "")
+assign("Cursor", "dark", "blue", {bold = true})
+assign("Visual", "dark", "blue", {})
 
-apply("Search", "NONE", "NONE", "bold,underline")
-apply("IncSearch", "NONE", "NONE", "bold,underline")
+assign("LineNr", "gray", "dark", {})
+assign("LineNrAbove", "gray", "dark", {})
+assign("LineNrBelow", "gray", "dark", {})
+assign("CursorLine", "", "", {})
+assign("CursorLineNr", "bright", "dark", {bold = true})
 
-apply("VertSplit", "bright", "NONE", "bold")
-apply("SignColumn", "", "dark", "NONE")
+assign("Search", "", "", {bold = true, underline = true})
+assign("IncSearch", "", "", {bold = true, underline = true})
 
-apply("Pmenu", "bright", "gray", "NONE")
-apply("PmenuSel", "dark", "bright", "NONE")
-apply("PmenuSbar", "NONE", "gray", "NONE")
-apply("PmenuThumb", "NONE", "bright", "NONE")
+assign("VertSplit", "bright", "", {})
+assign("SignColumn", "", "dark", {})
 
-apply("StatusLine", "bright", "dark", "bold")
-apply("StatusLineNC", "bright", "dark", "NONE")
+assign("Pmenu", "bright", "gray", {})
+assign("PmenuSel", "dark", "bright", {})
+assign("PmenuSbar", "", "gray", {})
+assign("PmenuThumb", "", "bright", {})
+
+assign("StatusLine", "bright", "dark", {bold = true})
+assign("StatusLineNC", "bright", "dark", {})
 
 -- nvim-cmp
-apply("CmpItemAbbr", "bright", "NONE", "NONE")
-apply("CmpItemAbbrDefault", "bright", "NONE", "NONE")
+assign("CmpItemAbbr", "bright", "", {})
+assign("CmpItemAbbrDefault", "bright", "", {})
 
-apply("CmpItemAbbrDeprecated", "magenta", "NONE", "NONE")
-apply("CmpItemAbbrDeprecatedDefault", "magenta", "NONE", "NONE")
+assign("CmpItemAbbrDeprecated", "magenta", "", {})
+assign("CmpItemAbbrDeprecatedDefault", "magenta", "", {})
 
-apply("CmpItemAbbrMatch", "dark", "cyan", "bold")
-apply("CmpItemAbbrMatchDefault", "dark", "cyan", "bold")
+assign("CmpItemAbbrMatch", "dark", "cyan", {bold = true})
+assign("CmpItemAbbrMatchDefault", "dark", "cyan", {bold = true})
 
-apply("CmpItemAbbrMatchFuzzy", "bright", "NONE", "bold,underline")
-apply("CmpItemAbbrMatchFuzzyDefault", "bright", "NONE", "bold,underline")
+assign("CmpItemAbbrMatchFuzzy", "bright", "", {bold = true, underline = true})
+assign("CmpItemAbbrMatchFuzzyDefault", "bright", "", {bold = true, underline = true})
 
-apply("CmpItemKind", "blue", "NONE", "NONE")
-apply("CmpItemKindDefault", "blue", "NONE", "NONE")
+assign("CmpItemKind", "blue", "", {})
+assign("CmpItemKindDefault", "blue", "", {})
 
-apply("CmpItemMenu", "bright", "NONE", "NONE")
-apply("CmpItemMenuDefault", "bright", "NONE", "NONE")
+assign("CmpItemMenu", "bright", "", {})
+assign("CmpItemMenuDefault", "bright", "", {})
 
 -- Syntax
 -- ======
 
 -- meta
-apply("Title", "light", "", "bold")
-apply("Comment", "gray", "dark", "bold")
+assign("Title", "light", "", {bold = true})
+assign("Comment", "gray", "", {bold = true})
 
-apply("Constant", "bright", "", "NONE")
-apply("String", "yellow", "", "NONE")
-apply("Character", "blue", "", "")
-apply("Number", "yellow", "", "")
-apply("Float", "yellow", "", "")
-apply("Boolean", "green", "", "")
+assign("Constant", "bright", "", {})
+assign("String", "yellow", "", {})
+assign("Character", "blue", "", {})
+assign("Number", "green", "", {})
+assign("Float", "green", "", {})
+assign("Boolean", "green", "", {bold = true})
 
-apply("Identifier", "light", "", "bold")
-apply("Function", "cyan", "", "bold")
+assign("Identifier", "light", "", {bold = true})
+assign("Function", "blue", "", {bold = true})
 
--- treesitter
-apply("TSAttribute", "magenta", "", "")
-apply("TSBoolean", "green", "", "")
-apply("TSCharacter", "blue", "", "")
-apply("TSComment", "light", "dark", "")
-apply("TSConditional", "green", "", "NONE")
-apply("TSConstBuiltin", "", "", "bold")
-apply("TSConstMacro", "blue", "", "bold")
-apply("TSConstant", "bright", "", "NONE")
-apply("TSConstructer", "blue", "", "")
-apply("TSDanger", "red", "", "bold")
-apply("TSEmphasis", "", "", "bold")
-apply("TSEnvironment", "cyan", "", "")
-apply("TSEnvironmentName", "green", "", "")
-apply("TSError", "dark", "red", "bold")
-apply("TSException", "green", "", "")
-apply("TSField", "light", "", "")
-apply("TSFloat", "yellow", "", "")
-apply("TSFuncBuiltin", "cyan", "", "bold")
-apply("TSFuncBuiltin", "cyan", "", "italic")
-apply("TSFunction", "cyan", "", "")
-apply("TSInclude", "green", "", "")
-apply("TSKeyword", "green", "", "")
-apply("TSKeywordFunction", "green", "", "")
-apply("TSKeywordOperator", "light", "", "bold")
-apply("TSKeywordReturn", "red", "", "")
-apply("TSLabel", "green", "", "bold")
-apply("TSLitetal", "yellow", "", "")
-apply("TSMethod", "light", "", "")
-apply("TSNamespace", "light", "", "bold")
-apply("TSNote", "dark", "yellow", "")
-apply("TSNumber", "yellow", "", "")
-apply("TSOperator", "light", "", "bold")
-apply("TSParameter", "light", "", "bold")
-apply("TSProperty", "light", "", "")
-apply("TSPuncSpecial", "", "", "bold")
-apply("TSPunctBracket", "", "", "bold")
-apply("TSPunctDelimiter", "", "", "bold")
-apply("TSRepeat", "green", "", "")
-apply("TSStirng", "yellow", "", "")
-apply("TSStrike", "", "", "strikethrough")
-apply("TSStringEscape", "cyan", "", "")
-apply("TSStringRegex", "cyan", "", "")
-apply("TSStringSpecial", "blue", "", "")
-apply("TSSymbol", "cyan", "", "")
-apply("TSTag", "blue", "", "")
-apply("TSTagAttribute", "green", "", "")
-apply("TSTagDelimiter", "light", "", "bold")
-apply("TSText", "light", "", "")
-apply("TSTitle", "", "", "bold")
-apply("TSType", "", "", "bold")
-apply("TSURI", "green", "", "")
-apply("TSUnderline", "", "", "underline")
-apply("TSVariableBuiltin", "", "", "bold")
-apply("TSWarning", "magenta", "", "bold")
+assign("Statement", "green", "", {})
+assign("Operator", "", "", {bold = true})
 
--- statements
-apply("Statement", "green", "", "NONE")
-apply("Operator", "", "", "bold")
+assign("PreProc", "yellow", "", {})
+assign("Type", "green", "", {})
+assign("Special", "magenta", "", {})
 
--- preproc
-apply("PreProc", "yellow", "", "NONE")
+assign("Underlined", "", "", {underline = true})
+assign("Ignore", "gray", "", {})
+assign("Todo", "dark", "yellow", {})
 
--- types
-apply("Type", "cyan", "", "NONE")
+-- FileTypes
+-- =========
+assign("htmlTag", "blue", "", {})
+assign("htmlEndTag", "blue", "", {})
 
--- special
-apply("Special", "blue", "", "NONE")
+assign("xmlTag", "blue", "", {})
+assign("xmlEndTag", "blue", "", {})
+assign("xmlTagName", "green", "", {})
 
--- others
-apply("Underlined", "", "", "bold")
-apply("Ignore", "gray", "", "")
-apply("Todo", "dark", "yellow", "")
+assign("yamlBool", "blue", "", {})
 
--- html
-apply("htmlTag", "blue", "", "")
-apply("htmlEndTag", "blue", "", "")
+assign("markdownHeadingDelimiter", "green", "", {bold = true})
+assign("markdownUrl", "blue", "", {})
 
--- xml
-apply("xmlTag", "blue", "", "")
-apply("xmlEndTag", "blue", "", "")
-apply("xmlTagName", "green", "", "")
-
--- yaml
-apply("yamlBool", "green", "", "")
-apply("yamlBlockMappingKey", "light", "", "NONE")
-apply("yamlFlowMappingKey", "light", "", "NONE")
-
--- markdown
-apply("markdownHeadingDelimiter", "green", "", "bold")
-apply("markdownLink", "yellow", "", "")
-
--- perl
-apply("perlIdentifier", "light", "", "NONE")
-apply("perlOperator", "blue", "", "NONE")
-apply("perlSubName", "blue", "", "bold")
-apply("perlPackageDecl", "blue", "", "")
-apply("perlStatementPackage", "green", "", "")
+assign("perlIdentifier", "darkblue", "", {})
