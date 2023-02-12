@@ -1,6 +1,5 @@
-local fm = require("nvim-tree")
-
-fm.setup {
+require("nvim-tree").setup {
+  disable_netrw = true,
   view = {
     side = "left"
   },
