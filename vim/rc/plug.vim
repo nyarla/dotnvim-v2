@@ -34,6 +34,7 @@ Plug 'dmitmel/cmp-vim-lsp'
 " -------
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'commit': 'd7c12db4c8bdb54afa787927292bf2d916bd09a2'}
 Plug 'sbdchd/neoformat'
+Plug 'sgur/vim-editorconfig', {'commit': '5c3a5b4e7830a6885ec3e70fa5151c59afde2ad5'}
 
 " nix
 " ---
