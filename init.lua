@@ -3,7 +3,7 @@ local function include(path)
   vim.cmd(vim.fn.printf("source %s", DOTNVIM .. "/" .. path))
 end
 
-include("vim/rc/plugins.vim")
+include("vim/rc/plug.vim")
 
 require("rc.colorscheme")
 require("rc.options")
