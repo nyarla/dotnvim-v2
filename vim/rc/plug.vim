@@ -10,7 +10,7 @@ Plug 'nvim-tree/nvim-tree.lua', {'commit': 'b712b82b0ca4eb402ced2d83f8082366989e
 
 " status or tab line
 " ------------------
-Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-lualine/lualine.nvim', {'commit': '0050b308552e45f7128f399886c86afefc3eb988'}
 
 " auto-complete
 " -------------
